@@ -1,0 +1,112 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+@custom-variant light (&:where(.light, .light *));
+
+:root {
+  --bg: #0b0c0e;
+  --fg: #fafafa;
+  --body: #d4d4d8;
+  --muted: #a1a1aa;
+  --subtle: #71717a;
+  --line: #27272a;
+  --card: rgb(24 24 27 / 0.15);
+  --card-hover: rgb(39 39 42 / 0.35);
+  --accent: #2dd4bf;
+  --dot: rgb(255 255 255 / 0.1);
+  --mark-mix: 24%;
+  color-scheme: dark;
+}
+
+html.light {
+  --bg: #f7f7f8;
+  --fg: #18181b;
+  --body: #3f3f46;
+  --muted: #52525b;
+  --subtle: #71717a;
+  --line: #e4e4e7;
+  --card: rgb(255 255 255 / 0.35);
+  --card-hover: rgb(255 255 255 / 0.7);
+  --accent: #0d9488;
+  --dot: rgb(0 0 0 / 0.11);
+  --mark-mix: 30%;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-accent: var(--accent);
+}
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --animate-blink: blink 1s steps(1) infinite;
+  --animate-fade: fade 0.5s ease-out both;
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+body {
+  @apply bg-bg text-body font-sans antialiased;
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* highlighted clause in the text; --c is the category colour */
+mark.clause {
+  color: inherit;
+  background-color: color-mix(in srgb, var(--c) var(--mark-mix), transparent);
+  border-bottom: 2px solid var(--c);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+mark.clause.dim {
+  background-color: transparent;
+  border-bottom-color: color-mix(in srgb, var(--c) 35%, transparent);
+}
+mark.clause .kw {
+  font-weight: 650;
+  color: var(--fg);
+}
+mark.clause.flash {
+  animation: flash 1.4s ease-out;
+}
+.finding.flash {
+  animation: flash-ring 1.4s ease-out;
+}
+@keyframes flash {
+  0%, 30% { background-color: color-mix(in srgb, var(--c) 75%, transparent); }
+}
+@keyframes flash-ring {
+  0%, 30% { border-color: var(--accent); }
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.55);
+  backdrop-filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
