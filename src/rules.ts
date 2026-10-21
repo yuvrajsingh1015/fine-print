@@ -11,7 +11,10 @@ export type CategoryId =
   | "tracking"
   | "arbitration"
   | "liability"
-  | "account_termination";
+  | "account_termination"
+  | "claim_deadline"
+  | "working_time"
+  | "side_jobs";
 
 export interface Category {
   id: CategoryId;
@@ -127,12 +130,12 @@ export const CATEGORIES: Category[] = [
   },
   {
     id: "price_change",
-    label: { en: "Price changes", de: "Preisänderungen" },
+    label: { en: "Price & pay changes", de: "Preis- & Lohnänderungen" },
     color: "#f87171",
     severity: "high",
     explanation: {
-      en: "The provider can raise the price during the contract.",
-      de: "Der Anbieter kann den Preis während der Laufzeit erhöhen.",
+      en: "What you pay or get paid can change during the contract, without a new agreement.",
+      de: "Was Sie zahlen oder bekommen, kann sich während der Laufzeit ohne neue Vereinbarung ändern.",
     },
     patterns: [
       p("\\bprice (?:increase|change|adjustment)s?"),
@@ -145,6 +148,14 @@ export const CATEGORIES: Category[] = [
       p("staffelmiete"),
       p("indexmiete"),
       p("\\b(?:Miete|Preis|Preise|Beitrag|Entgelt|Grundgebühr)~erhöht sich"),
+      // employment: pay that can be withdrawn, reduced or offset
+      p("widerrufsvorbehalt|\\bVorbehalt des Widerrufs|freiwilligkeitsvorbehalt"),
+      p("\\b(?:zu )?widerrufen"),
+      p("\\bfreiwillig~(?:kein|ohne)~Anspruch"),
+      p("\\bbetriebliche[rn]? Übung"),
+      p("\\b(?:zu )?kürzen(?![\\p{L}])|\\bKürzung"),
+      p("\\bwerden~verrechnet"),
+      p("\\b(?:may|can) (?:withdraw|reduce|revoke|cancel)~(?:pay|bonus|allowance|salary|benefit)"),
     ],
   },
   {
@@ -153,8 +164,8 @@ export const CATEGORIES: Category[] = [
     color: "#c084fc",
     severity: "medium",
     explanation: {
-      en: "Extra costs can apply on top of the regular price, for example when you cancel or pay late.",
-      de: "Zusätzlich zum normalen Preis können Kosten anfallen, etwa bei Kündigung oder Zahlungsverzug.",
+      en: "Extra costs, penalties or deductions can apply, for example when you cancel, pay late or break a rule.",
+      de: "Zusätzliche Kosten, Strafen oder Abzüge können anfallen, etwa bei Kündigung, Zahlungsverzug oder Regelverstoß.",
     },
     patterns: [
       p("\\b(?:cancell?ation|termination|early termination|late|administrative|admin|processing|activation|set-?up|reactivation|joining|enrollment|enrolment) fees?"),
@@ -174,6 +185,13 @@ export const CATEGORIES: Category[] = [
       p("\\bsecurity deposit"),
       p("\\bkaution"),
       p("\\b(?:Mahnung|Rücklastschrift|Entsperrung)~(?:€|EUR|Euro|\\d)"),
+      p("\\beinbehalten"),
+      p("\\bKosten~(?:zu tragen|trägt|tragen)"),
+      p("\\b(?:bear|pay) (?:the|all|any) costs?"),
+      p("\\baufrechn|\\baufzurechnen"),
+      p("\\bzurückzu(?:zahlen|erstatten)|\\brückzahlung|\\brepay"),
+      p("\\bWegfall der Bereicherung"),
+      p("\\bdeduct~(?:from your|wages|salary|pay)"),
     ],
   },
   {
@@ -194,6 +212,10 @@ export const CATEGORIES: Category[] = [
       p("\\b(?:transferred|processed|stored)~(?:United States|USA|third countr)"),
       p("\\bcredit (?:reference|reporting) agenc"),
       p("\\b(?:SCHUFA|Auskunftei)"),
+      p("\\bexterne~Stelle"),
+      p("steuerberater|\\bLohnbüro|\\b(?:Dienstleister|Auftragsverarbeiter)"),
+      p("\\bKrankenkasse ab(?![\\p{L}])"),
+      p("\\b(?:payroll|service) providers?"),
       p("\\b(?:an|gegenüber|von|mit) Dritte[n]?(?![\\p{L}])"),
       p("drittanbieter"),
       p("\\bdritt(?:unternehmen|parteien|länder|staaten|land)"),
@@ -294,12 +316,12 @@ export const CATEGORIES: Category[] = [
   },
   {
     id: "account_termination",
-    label: { en: "Account termination", de: "Kontosperrung" },
+    label: { en: "Suspension & termination", de: "Sperrung & Beendigung" },
     color: "#e879f9",
     severity: "high",
     explanation: {
-      en: "The provider can suspend or end your account, sometimes without warning or reason.",
-      de: "Der Anbieter kann Ihr Konto sperren oder beenden, teils ohne Vorwarnung oder Grund.",
+      en: "The other side can suspend you, release you from work or end the contract, sometimes without warning.",
+      de: "Die Gegenseite kann Sie sperren, freistellen oder den Vertrag beenden, teils ohne Vorwarnung.",
     },
     patterns: [
       p("\\b(?:we|us|company|provider)~(?<![\\p{L}])(?:suspend|terminate|restrict|block|disable|close|deactivate|delete)\\w*~(?:account|access|use|service)"),
@@ -315,7 +337,73 @@ export const CATEGORIES: Category[] = [
       p("\\bfristlos"),
       p("\\bohne (?:vorherige )?(?:Ankündigung|Vorankündigung|Angabe von Gründen)"),
       p("\\bnach (?:eigenem|freiem) Ermessen"),
+      p("\\bfreistell|\\bfreizustellen"),
+      p("\\bohne dass es einer Kündigung bedarf"),
+      p("\\bgarden leave|\\brelease~from (?:work|duties)"),
       p("\\b(?:Versorgung|Belieferung|Lieferung|Leistung|Dienst|Zugang|Anschluss)~(?:unterbrochen|eingestellt|gesperrt)"),
+    ],
+  },
+  {
+    id: "claim_deadline",
+    label: { en: "Claim deadlines", de: "Ausschlussfristen" },
+    color: "#f59e0b",
+    severity: "high",
+    explanation: {
+      en: "Your claims (for example unpaid wages) expire if you do not raise them within a short deadline.",
+      de: "Ihre Ansprüche (etwa offener Lohn) verfallen, wenn Sie sie nicht innerhalb einer kurzen Frist geltend machen.",
+    },
+    patterns: [
+      p("ausschlussfrist"),
+      p("verfallfrist"),
+      p("\\bAnsprüche~(?:verfallen|erlöschen|geltend (?:zu )?mach|geltend gemacht)"),
+      p("\\bverfallen(?![\\p{L}])"),
+      p("\\bGeltendmachung~(?:Ansprüch|Frist|innerhalb)"),
+      p("klagefrist"),
+      p("\\bKündigungsschutzklage~(?:Frist|innerhalb)"),
+      p("\\bclaims?~(?:must|shall) be (?:made|brought|filed|asserted|raised|submitted) within"),
+      p("\\btime-barred|\\bforfeit"),
+    ],
+  },
+  {
+    id: "working_time",
+    label: { en: "Hours, shifts & duties", de: "Arbeitszeit, Schichten & Einsatz" },
+    color: "#94a3b8",
+    severity: "medium",
+    explanation: {
+      en: "You can be asked to work overtime, nights, weekends or other duties and places, often at short notice.",
+      de: "Sie können zu Überstunden, Nacht- oder Wochenendarbeit oder anderen Aufgaben und Orten eingeteilt werden, oft kurzfristig.",
+    },
+    patterns: [
+      p("mehrarbeit|überstunden"),
+      p("\\bovertime"),
+      p("\\bwechselnde[nr]? Schichten|schichtarbeit|schichtdienst"),
+      p("\\b(?:shift work|rotating shifts)"),
+      p("\\bnachts(?![\\p{L}])|nachtarbeit|\\bnight (?:work|shifts?)"),
+      p("\\bSonn- und Feiertag|\\ban Sonn|\\bon (?:weekends|Sundays|public holidays)"),
+      p("jahresarbeitszeit|arbeitszeitkonto|\\bannuali[sz]ed hours"),
+      p("rufbereitschaft|bereitschaftsdienst|\\bon[- ]call"),
+      p("\\babgegolten"),
+      p("\\bandere[n]? (?:gleichwertige|zumutbare)~Tätigkeit|\\bandere[n]? Betriebsstätte|\\bversetz"),
+      p("\\b(?:other|different) (?:duties|locations?|sites?)|\\breassign"),
+      p("\\bDienstplan~(?:bindend|vom Arbeitgeber)"),
+    ],
+  },
+  {
+    id: "side_jobs",
+    label: { en: "Side jobs & competition", de: "Nebentätigkeit & Wettbewerb" },
+    color: "#2dd4bf",
+    severity: "medium",
+    explanation: {
+      en: "Other jobs or competing work can be restricted or must be reported to the employer.",
+      de: "Andere Jobs oder Konkurrenztätigkeiten können eingeschränkt sein oder müssen gemeldet werden.",
+    },
+    patterns: [
+      p("nebentätigkeit|nebenbeschäftigung"),
+      p("\\bweitere[nr]? (?:Einkünfte|Beschäftigungsverhältnis)"),
+      p("\\banderweitige~Tätigkeit"),
+      p("wettbewerbsverbot|konkurrenztätigkeit"),
+      p("\\bnon-compet"),
+      p("\\b(?:secondary|outside|other) employment"),
     ],
   },
 ];

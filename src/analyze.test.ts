@@ -49,6 +49,7 @@ const POSITIVE: Record<CategoryId, { en: string[]; de: string[] }> = {
     de: [
       "Wir behalten uns eine Preisanpassung vor.",
       "Der Anbieter ist berechtigt, die Preise jährlich anzupassen.",
+      "Die Zulage wird unter dem Vorbehalt des Widerrufs gewährt.",
       "Eine Preiserhöhung wird sechs Wochen vorher mitgeteilt.",
     ],
   },
@@ -62,6 +63,7 @@ const POSITIVE: Record<CategoryId, { en: string[]; de: string[] }> = {
       "Für Rücklastschriften erheben wir eine Bearbeitungsgebühr von 15 €.",
       "Bei Verstoß wird eine Vertragsstrafe fällig.",
       "Für die Kartenausgabe fällt eine einmalige Pauschale an.",
+      "Zu viel gezahlter Lohn ist zurückzuzahlen.",
     ],
   },
   data_sharing: {
@@ -74,6 +76,7 @@ const POSITIVE: Record<CategoryId, { en: string[]; de: string[] }> = {
       "Ihre Daten können an Dritte weitergegeben werden.",
       "Wir arbeiten mit Drittanbietern zusammen.",
       "Die Weitergabe Ihrer Daten erfolgt nur an Partnerunternehmen.",
+      "Die Lohnabrechnung erfolgt durch einen externen Steuerberater.",
     ],
   },
   tracking: {
@@ -122,6 +125,38 @@ const POSITIVE: Record<CategoryId, { en: string[]; de: string[] }> = {
       "Bei Verstößen behalten wir uns eine Sperrung des Kontos vor.",
       "Wir können Ihr Konto jederzeit sperren.",
       "Der Anbieter kann den Vertrag fristlos kündigen.",
+      "Der Arbeitgeber kann den Mitarbeiter von der Arbeit freistellen.",
+    ],
+  },
+  claim_deadline: {
+    en: [
+      "All claims must be made within three months of becoming due.",
+      "Claims not raised in time are forfeited.",
+    ],
+    de: [
+      "Ansprüche verfallen, wenn sie nicht innerhalb von drei Monaten schriftlich geltend gemacht werden.",
+      "Es gilt eine Ausschlussfrist von zwei Monaten.",
+    ],
+  },
+  working_time: {
+    en: [
+      "The employee agrees to work overtime when required.",
+      "You may be asked to work night shifts and on weekends.",
+    ],
+    de: [
+      "Der Mitarbeiter ist zur Leistung von Mehrarbeit verpflichtet.",
+      "Die Arbeit erfolgt in wechselnden Schichten, auch an Sonn- und Feiertagen.",
+      "Der Arbeitgeber kann den Mitarbeiter an eine andere Betriebsstätte versetzen.",
+    ],
+  },
+  side_jobs: {
+    en: [
+      "Any secondary employment requires prior written consent.",
+      "The employee accepts a non-compete clause for twelve months.",
+    ],
+    de: [
+      "Jede Nebentätigkeit ist dem Arbeitgeber vorher anzuzeigen.",
+      "Weitere Beschäftigungsverhältnisse sind unverzüglich mitzuteilen.",
     ],
   },
 };
@@ -140,8 +175,8 @@ const NEUTRAL = [
 ];
 
 describe("rules", () => {
-  it("covers all ten categories", () => {
-    expect(CATEGORIES).toHaveLength(10);
+  it("covers every category", () => {
+    expect(CATEGORIES).toHaveLength(13);
     expect(Object.keys(POSITIVE).sort()).toEqual(CATEGORIES.map((c) => c.id).sort());
   });
 
