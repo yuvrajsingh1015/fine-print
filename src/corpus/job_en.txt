@@ -1,0 +1,38 @@
+#
+EMPLOYMENT AGREEMENT
+
+#cats: notice_period
+1. Probation. The first three months of employment are a probationary period, during which either party may end the employment by giving one week's notice.
+
+#cats: working_time
+2. Hours. Your normal working hours are 37.5 hours per week. You may be required to work additional hours without further pay where the needs of the business require.
+
+#cats: working_time
+3. Place of Work. Your normal place of work is our Leeds office, but we may require you to work at any of our other sites within a reasonable travelling distance.
+
+#cats: price_change
+4. Bonus. Any bonus is entirely discretionary and may be withdrawn or varied at any time. Payment in one year does not create an entitlement in future years.
+
+#cats: fees
+5. Deductions. You agree that we may deduct from your salary any sums you owe us, including overpaid salary, unreturned equipment and the cost of training if you leave within 12 months.
+
+#cats: side_jobs
+6. Other Work. You must not, without prior written consent, engage in any other business or employment while employed by us.
+
+#cats: side_jobs
+7. Restrictions. For six months after your employment ends, you will not work for a competitor within 20 miles of our offices.
+
+#cats: account_termination
+8. Garden Leave. During any notice period we may require you not to attend work and not to contact clients or colleagues.
+
+#cats: data_sharing
+9. Data. We may share your personal data with our payroll provider, pension provider and group companies.
+
+#cats: tracking
+10. Monitoring. We monitor the use of email, internet and telephone systems to ensure compliance with company policy.
+
+#cats: notice_period
+11. Notice. After probation, you must give us one month's written notice to terminate your employment.
+
+#
+12. Holidays. You are entitled to 25 days' paid holiday per year plus public holidays.

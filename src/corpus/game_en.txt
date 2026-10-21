@@ -1,0 +1,29 @@
+#
+Player Agreement – Starforge Online
+
+#cats: price_change
+Virtual currency has no cash value and we may change its price or the cost of items at our discretion.
+
+#cats: fees
+Purchases of virtual currency are final and cannot be refunded, even if your account is later closed.
+
+#cats: account_termination
+We can ban or suspend players for cheating, harassment or any other conduct we consider harmful to the community.
+
+#cats: tracking
+Our anti-cheat software scans running processes on your device while the game is open.
+
+#cats: data_sharing
+Aggregated gameplay statistics and your public profile may be made available to partners and esports organisers.
+
+#cats: liability
+To the extent permitted by applicable law, we will not be responsible for any loss of virtual items caused by server outages.
+
+#cats: arbitration
+Disputes will be resolved exclusively by a single arbitrator under the rules of the ICC, and you agree not to join any group action.
+
+#cats: auto_renewal
+The Battle Pass membership is billed every 30 days until you turn off renewal in your account settings.
+
+#
+Seasonal events run for four weeks and include new maps.

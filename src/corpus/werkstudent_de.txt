@@ -1,0 +1,29 @@
+#
+Arbeitsvertrag Werkstudent – Datenwerk GmbH
+
+#cats: minimum_term,account_termination
+§ 1 Befristung. Das Arbeitsverhältnis ist bis zum 31.03.2027 befristet und endet mit Ablauf dieses Tages, ohne dass es einer Kündigung bedarf.
+
+#cats: notice_period
+§ 1 Abs. 2. Während der Befristung können beide Seiten mit den gesetzlichen Fristen ordentlich kündigen.
+
+#cats: working_time
+§ 3 Arbeitszeit. Die wöchentliche Arbeitszeit beträgt 16 Stunden. In den Semesterferien kann sie auf bis zu 40 Stunden erhöht werden; der Werkstudent ist verpflichtet, auf Anweisung auch im Homeoffice oder bei Kunden vor Ort tätig zu werden.
+
+#cats: price_change
+§ 4 Vergütung. Eine etwaige Leistungsprämie wird nach billigem Ermessen festgesetzt und kann jederzeit eingestellt werden.
+
+#cats: side_jobs
+§ 7 Wettbewerb. Während des Arbeitsverhältnisses ist es dem Werkstudenten untersagt, für ein Konkurrenzunternehmen tätig zu werden.
+
+#cats: fees
+§ 8 Arbeitsmittel. Bei Verlust oder Beschädigung des überlassenen Laptops haftet der Werkstudent für den entstandenen Schaden; der Arbeitgeber kann den Betrag mit der Vergütung verrechnen.
+
+#cats: tracking
+§ 9 IT-Nutzung. Der Arbeitgeber ist berechtigt, die dienstlichen E-Mail-Konten und Protokolldaten stichprobenartig zu kontrollieren.
+
+#cats: claim_deadline
+§ 11 Ausschluss. Ansprüche, die nicht binnen drei Monaten nach Fälligkeit schriftlich erhoben werden, sind ausgeschlossen.
+
+#
+§ 6 Urlaub. Der Urlaubsanspruch richtet sich nach dem Bundesurlaubsgesetz.

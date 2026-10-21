@@ -1,0 +1,32 @@
+#
+Customer Terms
+
+#cats: auto_renewal,notice_period
+Subscription Term. Each subscription will automatically renew for additional periods equal to the expiring term unless either party gives notice of non-renewal at least 30 days before the end of the relevant term.
+
+#cats: price_change
+Fees. The per-unit pricing during any renewal term will increase by up to 7% above the applicable pricing in the prior term unless we provide notice of different pricing.
+
+#cats: fees
+Late Payment. Overdue charges may accrue interest at the rate of 1.5% of the outstanding balance per month, and we may condition future renewals on shorter payment terms.
+
+#cats: account_termination
+Suspension. If any amount owed by you is 30 or more days overdue, we may, without limiting our other rights, suspend our services to you until such amounts are paid in full.
+
+#cats: data_sharing
+Sub-processors. We may engage sub-processors, including sub-processors located outside the European Economic Area, to process Customer Data.
+
+#cats: tracking
+Usage Data. We may collect and use usage data and telemetry to improve our products and for analytics.
+
+#cats: liability
+Exclusion of Damages. In no event will either party have any liability for any lost profits or revenues or for any indirect, special, incidental or consequential damages.
+
+#cats: arbitration
+Venue. The courts located in San Francisco County, California shall have exclusive jurisdiction to adjudicate any dispute arising out of this Agreement.
+
+#cats: price_change
+Modification. We may modify these Terms by posting a revised version, and your continued use of the services constitutes your acceptance of the modified Terms.
+
+#
+Support. Standard support is available on business days.

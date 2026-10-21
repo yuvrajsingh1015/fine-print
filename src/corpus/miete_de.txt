@@ -1,0 +1,29 @@
+#
+Wohnraummietvertrag
+
+#cats: minimum_term
+§ 2 Mietzeit. Die Parteien verzichten wechselseitig für die Dauer von vier Jahren ab Vertragsschluss auf ihr Recht zur ordentlichen Kündigung.
+
+#cats: price_change
+§ 3 Miete. Die Miete ist als Indexmiete vereinbart und ändert sich entsprechend dem vom Statistischen Bundesamt ermittelten Verbraucherpreisindex.
+
+#
+§ 4 Betriebskosten. Neben der Miete trägt der Mieter die Betriebskosten im Sinne der Betriebskostenverordnung; hierauf ist eine monatliche Vorauszahlung von 220 € zu leisten.
+
+#cats: fees
+§ 5 Kaution. Der Mieter leistet eine Sicherheit in Höhe von drei Monatsmieten.
+
+#cats: fees
+§ 6 Kleinreparaturen. Der Mieter trägt die Kosten kleinerer Instandhaltungen bis zu 100 € im Einzelfall, höchstens jedoch 8 % der Jahresnettomiete.
+
+#cats: fees
+§ 7 Zahlungsverzug. Für jede Mahnung wird eine Bearbeitungsgebühr von 5 € erhoben.
+
+#cats: liability
+§ 8 Haftung. Der Vermieter haftet für Sachschäden des Mieters nur bei Vorsatz oder grober Fahrlässigkeit.
+
+#cats: account_termination
+§ 9 Fristlose Kündigung. Der Vermieter kann das Mietverhältnis fristlos kündigen, wenn der Mieter mit zwei Monatsmieten im Rückstand ist.
+
+#
+§ 10 Haustiere. Kleintiere dürfen ohne Zustimmung gehalten werden.

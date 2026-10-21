@@ -1,0 +1,32 @@
+#
+Vehicle Rental Agreement – Terms and Conditions
+
+#cats: fees
+Fuel. The vehicle must be returned with a full tank. Otherwise a refuelling service charge of $9.99 per gallon applies.
+
+#cats: fees
+Late Return. Vehicles returned more than 29 minutes after the agreed time will be charged an additional day at the walk-up rate.
+
+#cats: fees
+Damage. Renter is responsible for all damage to the vehicle regardless of fault, including loss of use, diminution in value and administrative expenses.
+
+#cats: fees
+Tolls and Fines. Renter is responsible for all tolls, parking tickets and traffic fines, plus a processing fee of $25 per violation.
+
+#cats: tracking
+Telematics. The vehicle may be equipped with GPS and telematics devices that record location, speed and driving behaviour.
+
+#cats: data_sharing
+We may provide your name, address and driver's licence information to law enforcement and toll authorities and to collection agencies.
+
+#cats: liability
+We are not liable for any personal property left in the vehicle or for any indirect losses resulting from a breakdown.
+
+#cats: account_termination
+We may repossess the vehicle without notice if you breach this agreement.
+
+#cats: arbitration
+Any claim must be resolved through binding arbitration on an individual basis; you give up the right to a trial by jury.
+
+#
+Additional drivers must be at least 25 years old and present a valid licence.

@@ -1,0 +1,38 @@
+#
+Terms of Service
+
+#cats: auto_renewal
+Billing Cycle. The membership fee for our service will be charged to your Payment Method on the specific payment date indicated on your Account page. Your membership will continue until terminated.
+
+#cats: auto_renewal,notice_period
+Free Trials. Your membership may start with a free trial. Unless you cancel before the end of the free trial, we will automatically begin charging the monthly membership fee to your Payment Method.
+
+#cats: notice_period,fees
+Cancellation. You can cancel your membership at any time, and you will continue to have access to the service through the end of your billing period. Payments are non-refundable and there are no refunds or credits for partially used membership periods.
+
+#cats: price_change
+Changes to the Price and Plans. We may change our plans and the price of our service from time to time; however, any price changes will apply no earlier than 30 days following notice to you.
+
+#cats: price_change
+Changes to these Terms. We may update these Terms of Use from time to time. Your continued use of the service after the effective date of the revised Terms constitutes acceptance.
+
+#cats: tracking
+Personalisation. We continually analyse what you watch, search and rate in order to improve our recommendations and to show you personalised promotions.
+
+#cats: data_sharing
+Third parties. We may share information with our affiliates, service providers and partners who help us operate the service and to market our products.
+
+#cats: account_termination
+Account Access. We may terminate or restrict your use of our service, without compensation or notice, if you are, or if we suspect that you are, in violation of these Terms.
+
+#cats: liability
+Warranties. The service is provided "as is" and without warranty or condition. We do not guarantee that the service will be uninterrupted or error-free.
+
+#cats: liability
+Limitation of Liability. In no event shall our total liability to you exceed the amount you paid us in the six months preceding the claim.
+
+#cats: arbitration
+Arbitration Agreement. You and we agree that any dispute or claim relating in any way to the service will be resolved by binding individual arbitration, rather than in court, and you waive your right to participate in a class action lawsuit.
+
+#
+Viewing. You may view content primarily within the country in which you have established your account.

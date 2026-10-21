@@ -1,0 +1,35 @@
+#
+RESIDENTIAL LEASE AGREEMENT
+
+#cats: minimum_term
+1. TERM. The lease term begins on September 1 and ends on August 31 of the following year.
+
+#cats: auto_renewal,notice_period
+2. HOLDOVER. If neither party gives at least sixty (60) days' written notice before the end of the term, this lease will convert to a month-to-month tenancy at a rent 10% above the current rent.
+
+#
+3. RENT. Tenant shall pay $1,450 per month, due on the first day of each month.
+
+#cats: fees
+4. LATE CHARGE. If rent is not received by the fifth day of the month, Tenant shall pay a late charge of $75 plus $10 for each additional day the rent remains unpaid.
+
+#cats: fees
+5. SECURITY DEPOSIT. Landlord may deduct from the deposit unpaid rent, cleaning costs and the cost of repairing any damage beyond normal wear and tear.
+
+#cats: fees
+6. EARLY TERMINATION. Tenant may terminate early only upon payment of an early termination fee equal to two months' rent.
+
+#cats: fees
+7. ATTORNEY FEES. In any action to enforce this lease, the prevailing party shall be entitled to reasonable attorney fees and costs.
+
+#cats: liability
+8. LANDLORD LIABILITY. Landlord shall not be liable for any damage or injury to Tenant, Tenant's guests or property, unless caused by Landlord's gross negligence.
+
+#
+9. ENTRY. Landlord may enter the premises with 24 hours' notice to make repairs.
+
+#cats: account_termination
+10. DEFAULT. If Tenant fails to pay rent when due, Landlord may terminate this lease upon three days' written notice.
+
+#cats: arbitration
+11. GOVERNING LAW. This lease shall be governed by the laws of the State of Ohio.

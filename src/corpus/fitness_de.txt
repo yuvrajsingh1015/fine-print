@@ -1,0 +1,35 @@
+#
+Allgemeine Geschäftsbedingungen – Studio Kraftwerk
+
+#cats: minimum_term
+1. Die Erstlaufzeit der Mitgliedschaft beträgt 24 Monate ab Vertragsbeginn.
+
+#cats: auto_renewal,notice_period,minimum_term
+2. Wird die Mitgliedschaft nicht spätestens einen Monat vor Ablauf der Erstlaufzeit gekündigt, läuft sie auf unbestimmte Zeit weiter und kann dann jederzeit mit einer Frist von einem Monat gekündigt werden.
+
+#cats: fees
+3. Zusätzlich zum Monatsbeitrag wird halbjährlich eine Servicepauschale von 19,90 € erhoben.
+
+#cats: fees
+4. Für die Ausstellung einer neuen Mitgliedskarte berechnen wir 15 €.
+
+#cats: price_change
+5. Das Studio ist berechtigt, den Mitgliedsbeitrag bei gestiegenen Kosten angemessen zu erhöhen; die Erhöhung wird mit einer Frist von sechs Wochen angekündigt.
+
+#cats: account_termination
+6. Bei schwerwiegenden Verstößen gegen die Hausordnung kann das Studio ein Hausverbot aussprechen und den Vertrag außerordentlich kündigen.
+
+#cats: fees
+7. Gerät das Mitglied mit zwei Monatsbeiträgen in Rückstand, wird der gesamte Beitrag bis zum Ende der Laufzeit sofort fällig.
+
+#cats: liability
+8. Das Studio haftet nicht für den Verlust mitgebrachter Kleidung oder Wertsachen, es sei denn, der Verlust beruht auf Vorsatz oder grober Fahrlässigkeit.
+
+#cats: tracking
+9. Zur Zutrittskontrolle wird beim Check-in ein Foto des Mitglieds gespeichert; der Trainingsbereich wird videoüberwacht.
+
+#cats: data_sharing
+10. Zum Einzug der Beiträge übermitteln wir Ihre Daten an einen externen Zahlungsdienstleister.
+
+#
+11. Das Training erfolgt in sauberer Sportkleidung und mit Handtuch.

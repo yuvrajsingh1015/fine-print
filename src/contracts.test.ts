@@ -48,6 +48,24 @@ Data. Customer data may be processed by sub-processors located in the United Sta
 Suspension. Cloudly may suspend access to the Services immediately if any amount is more than 30 days overdue.
 Limitation. Cloudly's aggregate liability shall not exceed the fees paid in the twelve (12) months preceding the claim.
 Governing Law. This Agreement is governed by the laws of England and Wales and the parties submit to the exclusive jurisdiction of the courts of London.`,
+arbeit_de: `Arbeitsvertrag für Aushilfen – Café Beispiel GmbH
+
+§ 1 Beginn und Probezeit
+Das Arbeitsverhältnis beginnt am 01.03.2027. Die ersten sechs Monate gelten als Probezeit, in der beide Seiten mit einer Frist von zwei Wochen kündigen können.
+§ 2 Arbeitszeit
+Die Arbeitszeit wird nach Dienstplan in wechselnden Schichten festgelegt, auch abends, nachts sowie an Sonn- und Feiertagen. Der Mitarbeiter ist verpflichtet, bei betrieblichem Bedarf Überstunden zu leisten. Mit dem Gehalt sind bis zu zehn Überstunden im Monat abgegolten.
+§ 3 Vergütung
+Der Stundenlohn beträgt 14,00 €. Die Fahrtkostenzulage ist eine freiwillige Leistung und wird unter dem Vorbehalt des Widerrufs gezahlt. Zu viel gezahlte Vergütung ist zurückzuzahlen.
+§ 4 Nebentätigkeit
+Jede Nebentätigkeit ist dem Arbeitgeber vorher schriftlich anzuzeigen.
+§ 5 Arbeitskleidung
+Für nicht zurückgegebene Arbeitskleidung werden 25 € vom Lohn einbehalten.
+§ 6 Ausschlussfristen
+Ansprüche aus dem Arbeitsverhältnis verfallen, wenn sie nicht innerhalb von drei Monaten nach Fälligkeit schriftlich geltend gemacht werden.
+§ 7 Beendigung
+Nach einer Kündigung kann der Arbeitgeber den Mitarbeiter unter Fortzahlung der Vergütung von der Arbeit freistellen.
+§ 8 Daten
+Die Lohnabrechnung wird von einem externen Steuerbüro erstellt, an das die dafür nötigen Daten übermittelt werden.`,
 neutral_en: `Welcome to the City Library. Members can borrow up to ten books at a time. Our reading room is open from 9 am to 8 pm. Please keep your voice down and enjoy your stay. Children's story time takes place every Saturday.`,
 };
 
@@ -56,6 +74,7 @@ const EXPECTED: Record<string, CategoryId[]> = {
   energie_de: ["minimum_term", "auto_renewal", "notice_period", "price_change", "fees", "account_termination", "data_sharing", "liability"],
   miete_de: ["minimum_term", "price_change", "fees"],
   saas_en: ["minimum_term", "auto_renewal", "notice_period", "fees", "price_change", "data_sharing", "account_termination", "liability", "arbitration"],
+  arbeit_de: ["notice_period", "working_time", "price_change", "fees", "side_jobs", "claim_deadline", "account_termination", "data_sharing"],
   neutral_en: [],
 };
 
@@ -76,5 +95,6 @@ describe("whole contracts", () => {
 
   it("does not report numbered headings as findings", () => {
     expect(analyze(CONTRACTS.miete_de).some((f) => f.quote === "§ 5 Kaution")).toBe(false);
+    expect(analyze("§ 11 Verfallfristen :\n\nText folgt.").length).toBe(0);
   });
 });

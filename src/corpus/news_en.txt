@@ -1,0 +1,35 @@
+#
+Digital Subscription Terms – The Morning Ledger
+
+#cats: auto_renewal
+Your subscription is continuous. At the end of each subscription period it rolls over into a new period of the same length and we charge the then-current rate to your card on file.
+
+#cats: price_change
+Introductory offers are for new subscribers only. After the introductory period, your subscription will be billed at the standard rate in effect at that time.
+
+#cats: notice_period
+To stop your subscription from rolling over, you must cancel online or by phone before your next billing date.
+
+#cats: fees
+If you cancel during the first year of an annual plan, you will be charged the difference between the discounted annual price and the full monthly price for the months used.
+
+#cats: tracking
+We and our advertising partners use cookies and similar technologies to measure readership and deliver ads that are relevant to you.
+
+#cats: data_sharing
+We may disclose subscriber details to the delivery partner and to companies within our group for marketing purposes.
+
+#cats: account_termination
+We reserve the right to cancel any subscription that we reasonably believe is being shared outside your household.
+
+#cats: liability
+Our total liability in connection with your subscription is limited to the subscription fees you paid in the previous twelve months.
+
+#cats: arbitration
+These terms are subject to the laws of the State of New York and any dispute shall be heard exclusively in the state or federal courts located in New York County.
+
+#
+You can read articles on up to five devices at a time.
+
+#
+Gift subscriptions can be redeemed within 12 months of purchase.

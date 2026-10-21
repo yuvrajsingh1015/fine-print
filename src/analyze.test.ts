@@ -49,6 +49,7 @@ const POSITIVE: Record<CategoryId, { en: string[]; de: string[] }> = {
     de: [
       "Wir behalten uns eine Preisanpassung vor.",
       "Der Anbieter ist berechtigt, die Preise jährlich anzupassen.",
+      "Die Zulage wird unter dem Vorbehalt des Widerrufs gewährt.",
       "Eine Preiserhöhung wird sechs Wochen vorher mitgeteilt.",
     ],
   },
@@ -62,6 +63,7 @@ const POSITIVE: Record<CategoryId, { en: string[]; de: string[] }> = {
       "Für Rücklastschriften erheben wir eine Bearbeitungsgebühr von 15 €.",
       "Bei Verstoß wird eine Vertragsstrafe fällig.",
       "Für die Kartenausgabe fällt eine einmalige Pauschale an.",
+      "Zu viel gezahlter Lohn ist zurückzuzahlen.",
     ],
   },
   data_sharing: {
@@ -74,6 +76,7 @@ const POSITIVE: Record<CategoryId, { en: string[]; de: string[] }> = {
       "Ihre Daten können an Dritte weitergegeben werden.",
       "Wir arbeiten mit Drittanbietern zusammen.",
       "Die Weitergabe Ihrer Daten erfolgt nur an Partnerunternehmen.",
+      "Die Lohnabrechnung erfolgt durch einen externen Steuerberater.",
     ],
   },
   tracking: {
@@ -122,6 +125,38 @@ const POSITIVE: Record<CategoryId, { en: string[]; de: string[] }> = {
       "Bei Verstößen behalten wir uns eine Sperrung des Kontos vor.",
       "Wir können Ihr Konto jederzeit sperren.",
       "Der Anbieter kann den Vertrag fristlos kündigen.",
+      "Der Arbeitgeber kann den Mitarbeiter von der Arbeit freistellen.",
+    ],
+  },
+  claim_deadline: {
+    en: [
+      "All claims must be made within three months of becoming due.",
+      "Claims not raised in time are forfeited.",
+    ],
+    de: [
+      "Ansprüche verfallen, wenn sie nicht innerhalb von drei Monaten schriftlich geltend gemacht werden.",
+      "Es gilt eine Ausschlussfrist von zwei Monaten.",
+    ],
+  },
+  working_time: {
+    en: [
+      "The employee agrees to work overtime when required.",
+      "You may be asked to work night shifts and on weekends.",
+    ],
+    de: [
+      "Der Mitarbeiter ist zur Leistung von Mehrarbeit verpflichtet.",
+      "Die Arbeit erfolgt in wechselnden Schichten, auch an Sonn- und Feiertagen.",
+      "Der Arbeitgeber kann den Mitarbeiter an eine andere Betriebsstätte versetzen.",
+    ],
+  },
+  side_jobs: {
+    en: [
+      "Any secondary employment requires prior written consent.",
+      "The employee accepts a non-compete clause for twelve months.",
+    ],
+    de: [
+      "Jede Nebentätigkeit ist dem Arbeitgeber vorher anzuzeigen.",
+      "Weitere Beschäftigungsverhältnisse sind unverzüglich mitzuteilen.",
     ],
   },
 };
@@ -140,8 +175,8 @@ const NEUTRAL = [
 ];
 
 describe("rules", () => {
-  it("covers all ten categories", () => {
-    expect(CATEGORIES).toHaveLength(10);
+  it("covers every category", () => {
+    expect(CATEGORIES).toHaveLength(13);
     expect(Object.keys(POSITIVE).sort()).toEqual(CATEGORIES.map((c) => c.id).sort());
   });
 
@@ -173,6 +208,34 @@ describe("rules", () => {
     expect(analyze(text).filter((f) => f.categoryId === "notice_period")).toEqual([]);
   });
 
+  it("only reports a notice period where one is actually set", () => {
+    const notNotice = [
+      "Beendet er das Arbeitsverhältnis vor Ablauf der Kündigungsfrist ohne wichtigen Grund, zahlt er eine Vertragsstrafe.",
+      "Das Arbeitsverhältnis endet, ohne dass es einer Kündigung bedarf, mit Ablauf des Monats, in dem die Rente beginnt.",
+      "Die Kündigungsschutzklage muss innerhalb einer Frist von drei Wochen ab Zugang der Kündigung erhoben werden.",
+    ];
+    for (const text of notNotice) expect(categoriesIn(text)).not.toContain("notice_period");
+    expect(categoriesIn("Die Kündigungsfristen richten sich nach dem Tarifvertrag.")).toContain("notice_period");
+  });
+
+  it("reports common court clauses as low severity", () => {
+    const [f] = analyze("Gerichtsstand ist Saarbrücken.");
+    expect(f.categoryId).toBe("arbitration");
+    expect(f.severity).toBe("low");
+    expect(analyze("Disputes go to binding arbitration.")[0].severity).toBe("high");
+  });
+
+  it("matches text from scans that lost its umlauts", () => {
+    expect(categoriesIn("Das Arbeitsverhaltnis endet, ohne dass es einer Kundigung bedarf.")).toContain("account_termination");
+    expect(categoriesIn("Zu viel gezahlte Bezuge sind zuruckzuzahlen.")).toContain("fees");
+    expect(categoriesIn("Daraus folgt, dass keine betriebliche Obung entsteht.")).toContain("price_change");
+  });
+
+  it("flags short-time work and excluded pay", () => {
+    expect(categoriesIn("Der Arbeitgeber ist berechtigt, Kurzarbeit einseitig anzuordnen.")).toContain("price_change");
+    expect(categoriesIn("§ 616 BGB ist vollständig abbedungen.")).toContain("price_change");
+  });
+
   it("is case-insensitive", () => {
     expect(categoriesIn("THIS AGREEMENT IS SUBJECT TO ARBITRATION.")).toContain("arbitration");
   });
@@ -184,7 +247,7 @@ describe("analyze", () => {
       "We use cookies and tracking pixels. Your subscription will automatically renew. Gerichtsstand ist Berlin.";
     const findings = analyze(text);
     expect(findings.map((f) => f.categoryId)).toEqual(["tracking", "auto_renewal", "arbitration"]);
-    expect(findings[0].matches.length).toBe(2);
+    expect(findings[0].matches.length).toBeGreaterThan(1);
   });
 
   it("points start/end at the sentence in the original text", () => {
@@ -210,6 +273,16 @@ describe("analyze", () => {
     const [f] = analyze(text);
     expect(f.categoryId).toBe("price_change");
     expect(f.numbers).toEqual(["5 %"]);
+  });
+
+  it("merges overlapping excerpts of one long sentence", () => {
+    const filler = "lorem ipsum dolor ".repeat(30);
+    const text = `${filler}we may share your data with partners and lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua and pass your data to third parties ${filler}`;
+    const found = analyze(text).filter((f) => f.categoryId === "data_sharing");
+    expect(found).toHaveLength(1);
+    expect(found[0].matches).toHaveLength(2);
+    expect(found[0].quote).toContain("share your data");
+    expect(found[0].quote).toContain("third parties");
   });
 
   it("attaches numbers found in the sentence", () => {

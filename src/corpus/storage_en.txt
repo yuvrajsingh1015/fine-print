@@ -1,0 +1,26 @@
+#
+Cloud Storage Service Agreement
+
+#cats: auto_renewal
+Paid plans renew at the end of each term and we will charge your payment method unless you downgrade beforehand.
+
+#cats: account_termination,fees
+Inactive Accounts. If your free account is inactive for 12 months, we may delete it together with all stored files.
+
+#cats: price_change
+We may introduce new fees for features that are currently free, with at least 30 days' notice.
+
+#cats: data_sharing
+We use third-party data centres and may store your files in any country where we or our providers operate.
+
+#cats: tracking
+We collect device identifiers and information about how you interact with the service.
+
+#cats: liability
+We are not responsible for the loss of any content stored on the service; you should keep your own backups.
+
+#cats: arbitration
+You and we waive any right to bring claims as a plaintiff or class member in any purported class or representative proceeding.
+
+#
+You keep ownership of everything you upload.

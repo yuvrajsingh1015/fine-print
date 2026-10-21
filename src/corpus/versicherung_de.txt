@@ -1,0 +1,29 @@
+#
+Allgemeine Versicherungsbedingungen Hausrat
+
+#cats: minimum_term,auto_renewal
+§ 3 Vertragsdauer. Der Vertrag wird für die im Versicherungsschein angegebene Zeit abgeschlossen. Er verlängert sich stillschweigend jeweils um ein Jahr, wenn nicht spätestens drei Monate vor Ablauf gekündigt wird.
+
+#cats: price_change
+§ 5 Beitragsanpassung. Der Versicherer ist berechtigt, den Beitrag für bestehende Verträge jährlich zu überprüfen und anzuheben, wenn sich der Schadenbedarf erhöht hat.
+
+#cats: fees
+§ 6 Ratenzahlung. Bei monatlicher Zahlung wird ein Ratenzuschlag von 5 % erhoben.
+
+#cats: fees
+§ 7 Verspätete Zahlung. Wird der Folgebeitrag nicht rechtzeitig gezahlt, kann der Versicherer dem Kunden auf dessen Kosten eine Zahlungsfrist bestimmen.
+
+#cats: account_termination
+§ 8 Leistungsfreiheit. Ist der Kunde nach Ablauf der Zahlungsfrist noch in Verzug, ist der Versicherer von der Verpflichtung zur Leistung frei und kann den Vertrag ohne Einhaltung einer Frist kündigen.
+
+#cats: claim_deadline
+§ 10 Anzeigepflicht. Ein Schaden ist dem Versicherer unverzüglich, spätestens innerhalb einer Woche, anzuzeigen; andernfalls kann der Versicherer die Leistung kürzen.
+
+#cats: liability
+§ 12 Ausschlüsse. Nicht versichert sind Schäden durch Abnutzung, Verschleiß sowie Schäden an Bargeld über 1.500 €.
+
+#cats: data_sharing
+§ 15 Datenaustausch. Zur Risikoprüfung tauscht der Versicherer Daten mit dem Hinweis- und Informationssystem der Versicherungswirtschaft (HIS) aus.
+
+#
+§ 2 Versicherte Sachen. Versichert ist der gesamte Hausrat in der im Versicherungsschein bezeichneten Wohnung.
