@@ -174,6 +174,9 @@ export default function App() {
       </header>
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6 sm:py-14">
+        <p aria-live="polite" className="sr-only">
+          {scanned ? t.findingsCount(findings.length, new Set(findings.map((f) => f.categoryId)).size) : ""}
+        </p>
         <section className="max-w-3xl animate-fade">
           <h1 className="text-4xl font-bold tracking-tight text-fg sm:text-5xl">{t.title}</h1>
           <p className="mt-4 text-lg text-body sm:text-xl">{t.tagline}</p>
