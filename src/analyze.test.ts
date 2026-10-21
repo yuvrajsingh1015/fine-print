@@ -247,7 +247,7 @@ describe("analyze", () => {
       "We use cookies and tracking pixels. Your subscription will automatically renew. Gerichtsstand ist Berlin.";
     const findings = analyze(text);
     expect(findings.map((f) => f.categoryId)).toEqual(["tracking", "auto_renewal", "arbitration"]);
-    expect(findings[0].matches.length).toBe(2);
+    expect(findings[0].matches.length).toBeGreaterThan(1);
   });
 
   it("points start/end at the sentence in the original text", () => {

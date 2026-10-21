@@ -37,7 +37,7 @@ Find the clauses a consumer should notice before agreeing, in these categories:
 - auto_renewal: the contract renews or extends automatically
 - notice_period: how far in advance the consumer must cancel
 - minimum_term: minimum or fixed contract duration
-- price_change: prices, or pay in a job contract, can be changed, withdrawn, reduced or offset
+- price_change: prices, pay in a job contract, or the terms themselves can be changed, withdrawn, reduced or offset
 - fees: extra fees, contract penalties, lump sums, interest, deductions, costs the consumer or employee must bear
 - data_sharing: personal data passed to others or abroad
 - tracking: cookies, tracking, analytics, profiling, advertising use
