@@ -225,6 +225,17 @@ describe("rules", () => {
     expect(analyze("Disputes go to binding arbitration.")[0].severity).toBe("high");
   });
 
+  it("matches text from scans that lost its umlauts", () => {
+    expect(categoriesIn("Das Arbeitsverhaltnis endet, ohne dass es einer Kundigung bedarf.")).toContain("account_termination");
+    expect(categoriesIn("Zu viel gezahlte Bezuge sind zuruckzuzahlen.")).toContain("fees");
+    expect(categoriesIn("Daraus folgt, dass keine betriebliche Obung entsteht.")).toContain("price_change");
+  });
+
+  it("flags short-time work and excluded pay", () => {
+    expect(categoriesIn("Der Arbeitgeber ist berechtigt, Kurzarbeit einseitig anzuordnen.")).toContain("price_change");
+    expect(categoriesIn("§ 616 BGB ist vollständig abbedungen.")).toContain("price_change");
+  });
+
   it("is case-insensitive", () => {
     expect(categoriesIn("THIS AGREEMENT IS SUBJECT TO ARBITRATION.")).toContain("arbitration");
   });

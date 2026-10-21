@@ -38,8 +38,31 @@ const GAP = "[^.!?]{0,60}?";
  * A leading "\b" is replaced by a lookbehind, because JS word boundaries do
  * not know umlauts.
  */
+// Scanned PDFs often come with a text layer that lost its umlauts
+// ("Kundigung", "zuruckzuzahlen", "ausschlieBlich"), so every umlaut in a
+// pattern also accepts the plain letter.
+const UMLAUT: Record<string, string> = { ä: "äa", ö: "öo", ü: "üu", Ä: "ÄA", Ö: "ÖO", Ü: "ÜU" };
+
+function looseUmlauts(source: string): string {
+  let out = "";
+  let inClass = false;
+  for (let i = 0; i < source.length; i++) {
+    const c = source[i];
+    if (c === "\\") {
+      out += c + (source[++i] ?? "");
+      continue;
+    }
+    if (c === "[") inClass = true;
+    else if (c === "]") inClass = false;
+    if (c in UMLAUT) out += inClass ? UMLAUT[c] : `[${UMLAUT[c]}]`;
+    else if (c === "ß" && !inClass) out += "(?:ß|ss|B)";
+    else out += c;
+  }
+  return out;
+}
+
 function p(source: string): RegExp {
-  const body = source
+  const body = looseUmlauts(source)
     .replace(/^\\b/, "(?<![\\p{L}\\p{N}])")
     .replaceAll("~", GAP)
     .replaceAll(" ", "\\s+");
@@ -101,7 +124,7 @@ export const CATEGORIES: Category[] = [
       p(`\\bkündig(?!ungsschutz)~${COUNT} (?:Monat|Woche|Tag)`),
       p("\\b(?:Monate?n?|Wochen?|Tage?n?) (?:vor|zum) (?:Ablauf|Ende)"),
       // not the deadline for suing ("Klage … innerhalb einer Frist von drei Wochen")
-      p("(?<!klage[^.!?]{0,150})(?<![\\p{L}])Frist von \\S+ (?:Monat|Woche|Tag)"),
+      p("(?<!(?:klage|Anspr|geltend)[^.!?]{0,150})(?<![\\p{L}])Frist von \\S+ (?:Monat|Woche|Tag)"),
     ],
   },
   {
@@ -152,7 +175,9 @@ export const CATEGORIES: Category[] = [
       p("widerrufsvorbehalt|\\bVorbehalt des Widerrufs|freiwilligkeitsvorbehalt"),
       p("\\b(?:zu )?widerrufen"),
       p("\\bfreiwillig~(?:kein|ohne)~Anspruch"),
-      p("\\bbetriebliche[rn]? Übung"),
+      p("\\bbetriebliche[rn]? [ÜO]bung"),
+      p("\\bKurzarbeit~(?:anzuordnen|anordnen)|\\bvermindern sich~(?:Arbeitsentgelt|Entgelt|Vergütung)"),
+      p("\\babbedungen|\\bnicht zur Aufrechterhaltung des Vergütungsanspruchs"),
       p("\\b(?:zu )?kürzen(?![\\p{L}])|\\bKürzung"),
       p("\\bwerden~verrechnet"),
       p("\\b(?:may|can) (?:withdraw|reduce|revoke|cancel)~(?:pay|bonus|allowance|salary|benefit)"),
@@ -190,7 +215,7 @@ export const CATEGORIES: Category[] = [
       p("\\b(?:bear|pay) (?:the|all|any) costs?"),
       p("\\baufrechn|\\baufzurechnen"),
       p("\\bzurückzu(?:zahlen|erstatten)|\\brückzahlung|\\brepay"),
-      p("\\bWegfall der Bereicherung"),
+      p("\\bWegfall der Bereicherung|\\bEinwand der Entreicherung"),
       p("\\bdeduct~(?:from your|wages|salary|pay)"),
     ],
   },
@@ -216,7 +241,7 @@ export const CATEGORIES: Category[] = [
       p("steuerberater|\\bLohnbüro|\\b(?:Dienstleister|Auftragsverarbeiter)"),
       p("\\bKrankenkasse ab(?![\\p{L}])"),
       p("\\b(?:payroll|service) providers?"),
-      p("\\b(?:an|gegenüber|von|mit) Dritte[n]?(?![\\p{L}])"),
+      p("(?<!(?:Abtretung|Verpfändung|abgetreten)[^.!?]{0,80})(?<![\\p{L}])(?:an|gegenüber|von|mit) Dritte[n]?(?![\\p{L}])"),
       p("drittanbieter"),
       p("\\bdritt(?:unternehmen|parteien|länder|staaten|land)"),
       p("\\bweiter(?:ge)?geben"),
@@ -338,7 +363,7 @@ export const CATEGORIES: Category[] = [
       p("\\bohne (?:vorherige )?(?:Ankündigung|Vorankündigung|Angabe von Gründen)"),
       p("\\bnach (?:eigenem|freiem) Ermessen"),
       p("\\bfreistell|\\bfreizustellen"),
-      p("\\bohne dass es einer Kündigung bedarf"),
+      p("\\bohne,? dass es einer Kündigung bedarf|\\bendet~ohne Kündigung"),
       p("\\bgarden leave|\\brelease~from (?:work|duties)"),
       p("\\b(?:Versorgung|Belieferung|Lieferung|Leistung|Dienst|Zugang|Anschluss)~(?:unterbrochen|eingestellt|gesperrt)"),
     ],
@@ -374,7 +399,7 @@ export const CATEGORIES: Category[] = [
       de: "Sie können zu Überstunden, Nacht- oder Wochenendarbeit oder anderen Aufgaben und Orten eingeteilt werden, oft kurzfristig.",
     },
     patterns: [
-      p("mehrarbeit|überstunden"),
+      p("mehrarbeit|[üo]berstunden"),
       p("\\bovertime"),
       p("\\bwechselnde[nr]? Schichten|schichtarbeit|schichtdienst"),
       p("\\b(?:shift work|rotating shifts)"),
@@ -382,7 +407,7 @@ export const CATEGORIES: Category[] = [
       p("\\bSonn- und Feiertag|\\ban Sonn|\\bon (?:weekends|Sundays|public holidays)"),
       p("jahresarbeitszeit|arbeitszeitkonto|\\bannuali[sz]ed hours"),
       p("rufbereitschaft|bereitschaftsdienst|\\bon[- ]call"),
-      p("\\babgegolten"),
+      p("\\b(?:Mehrarbeit|Überstunden)~abgegolten|\\babgegolten~(?:Mehrarbeit|Überstunden)"),
       p("\\bandere[n]? (?:gleichwertige|zumutbare)~Tätigkeit|\\bandere[n]? Betriebsstätte|\\bversetz"),
       p("\\b(?:other|different) (?:duties|locations?|sites?)|\\breassign"),
       p("\\bDienstplan~(?:bindend|vom Arbeitgeber)"),
