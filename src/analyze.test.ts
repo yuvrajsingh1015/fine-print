@@ -204,6 +204,14 @@ describe("analyze", () => {
     expect(f.quote).toContain("share your data");
   });
 
+  it("only attaches numbers close to the keyword", () => {
+    const text =
+      "Members pay 49 € once and 29 € per month for the studio, the sauna and every class, and we may change our prices by up to 5 %.";
+    const [f] = analyze(text);
+    expect(f.categoryId).toBe("price_change");
+    expect(f.numbers).toEqual(["5 %"]);
+  });
+
   it("attaches numbers found in the sentence", () => {
     const [f] = analyze("Die Mindestlaufzeit beträgt 24 Monate zu je 29,90 €.");
     expect(f.numbers).toEqual(["24 Monate", "29,90 €"]);

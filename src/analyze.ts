@@ -158,6 +158,32 @@ export function extractNumbers(sentence: string): string[] {
   return out;
 }
 
+// How far around a keyword hit numbers still count as belonging to it.
+const NUMBER_WINDOW = 50;
+
+/**
+ * Numbers close to the keyword hits, so a long sentence does not pull in
+ * amounts that belong to a different part of it.
+ */
+export function numbersNear(text: string, range: Range, hits: Range[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const hit of hits) {
+    let start = Math.max(range.start, hit.start - NUMBER_WINDOW);
+    let end = Math.min(range.end, hit.end + NUMBER_WINDOW);
+    // widen to whole words so "24 Mon|ate" is not cut in half
+    while (start > range.start && /\S/.test(text[start - 1])) start--;
+    while (end < range.end && /\S/.test(text[end])) end++;
+    for (const n of extractNumbers(text.slice(start, end))) {
+      if (!seen.has(n.toLowerCase())) {
+        seen.add(n.toLowerCase());
+        out.push(n);
+      }
+    }
+  }
+  return out;
+}
+
 export function compareFindings(a: Finding, b: Finding): number {
   return a.start - b.start || SEVERITY_RANK[a.severity] - SEVERITY_RANK[b.severity];
 }
@@ -194,7 +220,7 @@ export function analyze(text: string): Finding[] {
             end: range.end,
             matches: [hit],
             quote,
-            numbers: extractNumbers(quote),
+            numbers: [],
           });
         }
       }
@@ -202,7 +228,10 @@ export function analyze(text: string): Finding[] {
   }
 
   const list = [...findings.values()];
-  for (const f of list) f.matches.sort((a, b) => a.start - b.start);
+  for (const f of list) {
+    f.matches.sort((a, b) => a.start - b.start);
+    f.numbers = numbersNear(text, f, f.matches);
+  }
   return list.sort(compareFindings);
 }
 
