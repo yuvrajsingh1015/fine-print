@@ -11,8 +11,8 @@
   --muted: #a1a1aa;
   --subtle: #71717a;
   --line: #27272a;
-  --card: rgb(24 24 27 / 0.15);
-  --card-hover: rgb(39 39 42 / 0.35);
+  --card: #121316;
+  --card-hover: #18191c;
   --accent: #2dd4bf;
   --dot: rgb(255 255 255 / 0.1);
   --mark-mix: 24%;
@@ -26,8 +26,8 @@ html.light {
   --muted: #52525b;
   --subtle: #71717a;
   --line: #e4e4e7;
-  --card: rgb(255 255 255 / 0.35);
-  --card-hover: rgb(255 255 255 / 0.7);
+  --card: #fbfbfc;
+  --card-hover: #ffffff;
   --accent: #0d9488;
   --dot: rgb(0 0 0 / 0.11);
   --mark-mix: 30%;
