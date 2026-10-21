@@ -26,3 +26,6 @@ dist-ssr
 # Cloudflare Worker
 .wrangler
 .dev.vars
+
+# OCR files, copied from node_modules on dev/build
+public/ocr
