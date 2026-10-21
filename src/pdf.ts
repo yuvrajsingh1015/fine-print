@@ -1,5 +1,6 @@
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import { cleanPdfText } from "./pdftext";
 
 GlobalWorkerOptions.workerSrc = workerUrl;
 
@@ -42,7 +43,7 @@ export async function extractPdfText(file: File): Promise<string> {
     throw new PdfError("failed");
   }
 
-  const text = pages.filter(Boolean).join("\n\n");
+  const text = cleanPdfText(pages.filter(Boolean).join("\n\n"));
   if (text.replace(/\s/g, "").length < 20) throw new PdfError("no_text");
   return text;
 }
