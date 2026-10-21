@@ -19,8 +19,11 @@ export interface Category {
   color: string;
   severity: Severity;
   explanation: Record<Lang, string>;
-  patterns: RegExp[];
+  patterns: Pattern[];
 }
+
+/** A rule pattern; `severity` overrides the category's for this pattern only. */
+export type Pattern = RegExp & { severity?: Severity };
 
 // Gap that may span line breaks (PDF text) but never leaves the sentence.
 const GAP = "[^.!?]{0,60}?";
@@ -39,6 +42,14 @@ function p(source: string): RegExp {
     .replaceAll(" ", "\\s+");
   return new RegExp(body, "giu");
 }
+
+/** A pattern for wording that is common and usually harmless, reported as low. */
+function soft(source: string): Pattern {
+  return Object.assign(p(source), { severity: "low" as const });
+}
+
+// Number words that can stand before a period ("einem Monat", "drei Wochen").
+const COUNT = "(?:\\d+|eine[mn]?|zwei|drei|vier|sechs|acht|zwölf)";
 
 export const CATEGORIES: Category[] = [
   {
@@ -82,10 +93,12 @@ export const CATEGORIES: Category[] = [
       p("\\bcancell?ation~(?:takes effect|effective)~end of"),
       p("\\b(?:at least|no later than)~(?:days?|weeks?|months?)\\)? (?:before|prior to)"),
       p("\\bcancel~(?:at least|no later than|in advance|prior to|before the end)"),
-      p("kündigungsfrist"),
-      p("\\bkündig~(?:Monat|Woche|Tag)"),
+      p("kündigungsfrist\\w* (?:beträgt|betragen|von|richte|gilt|gelten|im|für|nach|bei)"),
+      p("\\b(?:mit|unter Einhaltung) (?:einer|der) (?:Kündigungs)?frist"),
+      p(`\\bkündig(?!ungsschutz)~${COUNT} (?:Monat|Woche|Tag)`),
       p("\\b(?:Monate?n?|Wochen?|Tage?n?) (?:vor|zum) (?:Ablauf|Ende)"),
-      p("\\bFrist von \\S+ (?:Monat|Woche|Tag)"),
+      // not the deadline for suing ("Klage … innerhalb einer Frist von drei Wochen")
+      p("(?<!klage[^.!?]{0,150})(?<![\\p{L}])Frist von \\S+ (?:Monat|Woche|Tag)"),
     ],
   },
   {
@@ -239,12 +252,12 @@ export const CATEGORIES: Category[] = [
       p("\\bcollective (?:proceeding|action|arbitration)"),
       p("\\brepresentative action"),
       p("\\bon an individual basis|\\bresolved individually"),
-      p("\\bgoverned by the laws? of"),
+      soft("\\bgoverned by the laws? of"),
       p("schiedsgericht"),
       p("schiedsverfahren"),
-      p("\\bschlichtung"),
-      p("streitbeilegung"),
-      p("gerichtsstand"),
+      soft("\\bschlichtung"),
+      soft("streitbeilegung"),
+      soft("gerichtsstand"),
       p("sammelklage"),
       p("\\bverzicht~(?:Recht|Klage|Anspr)"),
       p("\\bausschließlich zuständig"),

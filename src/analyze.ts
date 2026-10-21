@@ -2,6 +2,7 @@ import {
   CATEGORIES,
   SEVERITY_RANK,
   type CategoryId,
+  type Pattern,
   type Lang,
   type Severity,
 } from "./rules";
@@ -204,8 +205,10 @@ export function analyze(text: string): Finding[] {
           const hit = { start: sentence.start + m.index, end: sentence.start + m.index + m[0].length };
           const range = clip(text, sentence, hit);
           const key = `${category.id}:${range.start}`;
+          const severity = (pattern as Pattern).severity ?? category.severity;
           const existing = findings.get(key);
           if (existing) {
+            if (SEVERITY_RANK[severity] < SEVERITY_RANK[existing.severity]) existing.severity = severity;
             const overlaps = existing.matches.some((r) => hit.start < r.end && r.start < hit.end);
             if (!overlaps) existing.matches.push(hit);
             continue;
@@ -214,7 +217,7 @@ export function analyze(text: string): Finding[] {
           findings.set(key, {
             id: `r-${key}`,
             categoryId: category.id,
-            severity: category.severity,
+            severity,
             source: "rules",
             start: range.start,
             end: range.end,

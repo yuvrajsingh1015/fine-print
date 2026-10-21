@@ -173,6 +173,23 @@ describe("rules", () => {
     expect(analyze(text).filter((f) => f.categoryId === "notice_period")).toEqual([]);
   });
 
+  it("only reports a notice period where one is actually set", () => {
+    const notNotice = [
+      "Beendet er das Arbeitsverhältnis vor Ablauf der Kündigungsfrist ohne wichtigen Grund, zahlt er eine Vertragsstrafe.",
+      "Das Arbeitsverhältnis endet, ohne dass es einer Kündigung bedarf, mit Ablauf des Monats, in dem die Rente beginnt.",
+      "Die Kündigungsschutzklage muss innerhalb einer Frist von drei Wochen ab Zugang der Kündigung erhoben werden.",
+    ];
+    for (const text of notNotice) expect(categoriesIn(text)).not.toContain("notice_period");
+    expect(categoriesIn("Die Kündigungsfristen richten sich nach dem Tarifvertrag.")).toContain("notice_period");
+  });
+
+  it("reports common court clauses as low severity", () => {
+    const [f] = analyze("Gerichtsstand ist Saarbrücken.");
+    expect(f.categoryId).toBe("arbitration");
+    expect(f.severity).toBe("low");
+    expect(analyze("Disputes go to binding arbitration.")[0].severity).toBe("high");
+  });
+
   it("is case-insensitive", () => {
     expect(categoriesIn("THIS AGREEMENT IS SUBJECT TO ARBITRATION.")).toContain("arbitration");
   });
