@@ -8,3 +8,12 @@ export function cleanPdfText(text: string): string {
     .replace(/[ \t]+\n/g, "\n")
     .replace(/(\p{L})-\n[ \t]*(\p{Ll})/gu, "$1$2");
 }
+
+/**
+ * Text recognition sometimes starts a new paragraph in the middle of a
+ * sentence when the line spacing varies. Blank lines are dropped where the
+ * line before does not end a sentence and the next one starts in lower case.
+ */
+export function joinBrokenParagraphs(text: string): string {
+  return text.replace(/([^.!?:\s])[ \t]*\n(?:[ \t]*\n)+[ \t]*(?=\p{Ll})/gu, "$1\n");
+}

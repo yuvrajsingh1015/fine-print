@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type DragEvent } from "react";
 import { analyze, type Finding } from "./analyze";
 import { DeepCheckError, mergeFindings, requestDeepCheck, type DeepErrorCode, type DeepResult } from "./deepcheck";
 import { STRINGS } from "./i18n";
-import type { PdfErrorCode } from "./pdf";
+import type { OcrProgress, PdfErrorCode } from "./pdf";
 import type { CategoryId, Lang } from "./rules";
 import { SAMPLES, type Sample } from "./samples";
 import Button from "./components/Button";
@@ -48,6 +48,8 @@ export default function App() {
   const [filter, setFilter] = useState<CategoryId | null>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [pdfState, setPdfState] = useState<"idle" | "loading" | PdfErrorCode>("idle");
+  const [ocrProgress, setOcrProgress] = useState<OcrProgress | null>(null);
+  const [ocrInfo, setOcrInfo] = useState<{ skippedPages: number } | null>(null);
   const [dragging, setDragging] = useState(false);
   const [deep, setDeep] = useState<DeepState>({ status: "idle" });
   const [consented, setConsented] = useState(false);
@@ -94,26 +96,32 @@ export default function App() {
   function loadSample(sample: Sample) {
     setText(sample.text);
     setPdfState("idle");
+    setOcrInfo(null);
     scan(sample.text);
   }
 
   function clear() {
     setText("");
     setPdfState("idle");
+    setOcrInfo(null);
     scan("");
   }
 
   async function readPdf(file: File) {
     setPdfState("loading");
+    setOcrInfo(null);
     try {
       const { extractPdfText } = await import("./pdf");
-      const content = await extractPdfText(file);
-      setText(content);
+      const result = await extractPdfText(file, setOcrProgress);
+      setText(result.text);
       setPdfState("idle");
-      scan(content);
+      setOcrInfo(result.ocr ? { skippedPages: result.skippedPages } : null);
+      scan(result.text);
     } catch (error) {
       const code = (error as { code?: PdfErrorCode }).code;
       setPdfState(code ?? "failed");
+    } finally {
+      setOcrProgress(null);
     }
   }
 
@@ -251,7 +259,7 @@ export default function App() {
                 </Button>
               )}
               <Button onClick={() => fileInput.current?.click()} disabled={pdfState === "loading"}>
-                {pdfState === "loading" ? t.readingPdf : t.uploadPdf}
+                {pdfState !== "loading" ? t.uploadPdf : ocrProgress ? t.ocrRunning(ocrProgress.page, ocrProgress.pages) : t.readingPdf}
               </Button>
               <input
                 ref={fileInput}
@@ -271,6 +279,13 @@ export default function App() {
               )}
               <span className="hidden font-mono text-xs text-subtle sm:inline">{t.dropHint}</span>
             </div>
+
+            {ocrInfo && scanned && (
+              <p className="mt-3 text-sm text-muted">
+                {t.ocrNote}
+                {ocrInfo.skippedPages > 0 && ` ${t.ocrSkipped(ocrInfo.skippedPages)}`}
+              </p>
+            )}
 
             {pdfState !== "idle" && pdfState !== "loading" && (
               <p role="alert" className="mt-3 text-sm text-red-400 light:text-red-600">
