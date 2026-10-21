@@ -72,6 +72,8 @@ export function splitSentences(text: string): Range[] {
 }
 
 const HEADING = /^(?:§|\d+\.?\s|[IVX]+\.\s|(?:Art(?:icle|ikel)?|Section|Abschnitt|Clause|Ziffer)\s)|^[^\p{Ll}]+$/u;
+// inside a paragraph only clearly numbered lines count ("4. Daten", "§ 3 Miete")
+const NUMBERED = /^(?:§\s*\d+[a-z]?|\d+(?:\.\d+)*\.|[IVX]+\.)\s+\p{Lu}/u;
 
 /**
  * Short numbered lines that open a paragraph and have no punctuation at the
@@ -86,13 +88,19 @@ function headingEnds(text: string): number[] {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
     const next = lines[i + 1]?.trim();
-    if (prevBlank && next && line.length <= 60 && !/[.,;:!?-]$/.test(line) && HEADING.test(line)) {
+    const heading = prevBlank ? HEADING.test(line) : NUMBERED.test(line);
+    if (heading && next && line.length <= 60 && !/[.,;:!?-]$/.test(line)) {
       ends.push(offset + lines[i].length);
     }
     prevBlank = !line;
     offset += lines[i].length + 1;
   }
   return ends;
+}
+
+/** "§ 5 Kaution" names a topic; the clause itself follows below it. */
+function isHeading(part: string): boolean {
+  return part.length <= 60 && !/[.,;:!?]$/.test(part) && NUMBERED.test(part.replace(/\s+/g, " ") + " ");
 }
 
 function trimRange(text: string, start: number, end: number): Range | null {
@@ -117,14 +125,15 @@ export function collapse(text: string): string {
 
 const NUMBER =
   "(?:\\d+(?:[.,]\\d+)?|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|" +
-  "fourteen|thirty|sixty|ninety|ein(?:e[mnr]?)?|zwei|drei|vier|fünf|sechs|sieben|acht|" +
+  "fourteen|(?:twenty|thirty|forty|fifty|sixty|ninety)(?:-(?:one|two|three|four|five|six|seven|eight|nine))?|" +
+  "hundred|ein(?:e[mnr]?)?|zwei|drei|vier|fünf|sechs|sieben|acht|" +
   "neun|zehn|elf|zwölf|vierzehn|dreißig|sechzig|neunzig)";
 const UNIT =
   "(?:(?:business|working|calendar) days?|days?|weeks?|months?|years?|" +
   "(?:Werk|Kalender)?tage?n?|Wochen?|Monate?n?|Jahre?n?)";
 // "einen weiteren Monat", "one additional month"
 const FILLER = "(?:(?:weitere[nrs]?|additional|further|more|full|volle[n]?)\\s+)?";
-const DURATION = new RegExp(`(?<![\\p{L}\\p{N}])${NUMBER}[\\s-]+${FILLER}${UNIT}(?![\\p{L}])`, "giu");
+const DURATION = new RegExp(`(?<![\\p{L}\\p{N}])${NUMBER}(?:\\s*\\(\\d+\\))?[\\s-]+${FILLER}${UNIT}(?![\\p{L}])`, "giu");
 const MONEY = new RegExp(
   "(?:€|EUR|\\$|USD|£|CHF)\\s?\\d(?:[\\d.,]*\\d)?|\\d(?:[\\d.,]*\\d)?\\s?(?:€|EUR|Euro|\\$|USD|£|CHF|%|Prozent|percent)(?![\\p{L}])",
   "giu",
@@ -161,6 +170,7 @@ export function analyze(text: string): Finding[] {
   // Match per sentence, so a pattern with a gap can never reach into the next one.
   for (const sentence of sentences) {
     const part = text.slice(sentence.start, sentence.end);
+    if (isHeading(part)) continue;
     for (const category of CATEGORIES) {
       for (const pattern of category.patterns) {
         for (const m of part.matchAll(pattern)) {
