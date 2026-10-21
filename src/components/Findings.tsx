@@ -50,6 +50,15 @@ export default function Findings({ findings, lang, t, activeId, onSelect }: Prop
               >
                 {f.quote}
               </span>
+              {f.numbers.length > 0 && (
+                <span className="mt-2 flex flex-wrap gap-1.5">
+                  {f.numbers.map((n) => (
+                    <span key={n} className="rounded border border-line px-1.5 py-0.5 font-mono text-xs font-semibold text-fg">
+                      {n}
+                    </span>
+                  ))}
+                </span>
+              )}
               <span className="mt-2 block text-sm text-muted">{explanation}</span>
             </button>
           </li>
