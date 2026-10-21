@@ -95,5 +95,6 @@ describe("whole contracts", () => {
 
   it("does not report numbered headings as findings", () => {
     expect(analyze(CONTRACTS.miete_de).some((f) => f.quote === "§ 5 Kaution")).toBe(false);
+    expect(analyze("§ 11 Verfallfristen :\n\nText folgt.").length).toBe(0);
   });
 });

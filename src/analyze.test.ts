@@ -264,6 +264,16 @@ describe("analyze", () => {
     expect(f.numbers).toEqual(["5 %"]);
   });
 
+  it("merges overlapping excerpts of one long sentence", () => {
+    const filler = "lorem ipsum dolor ".repeat(30);
+    const text = `${filler}we may share your data with partners and lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua and pass your data to third parties ${filler}`;
+    const found = analyze(text).filter((f) => f.categoryId === "data_sharing");
+    expect(found).toHaveLength(1);
+    expect(found[0].matches).toHaveLength(2);
+    expect(found[0].quote).toContain("share your data");
+    expect(found[0].quote).toContain("third parties");
+  });
+
   it("attaches numbers found in the sentence", () => {
     const [f] = analyze("Die Mindestlaufzeit beträgt 24 Monate zu je 29,90 €.");
     expect(f.numbers).toEqual(["24 Monate", "29,90 €"]);

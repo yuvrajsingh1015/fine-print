@@ -101,7 +101,9 @@ function headingEnds(text: string): number[] {
 
 /** "§ 5 Kaution" names a topic; the clause itself follows below it. */
 function isHeading(part: string): boolean {
-  return part.length <= 60 && !/[.,;:!?]$/.test(part) && NUMBERED.test(part.replace(/\s+/g, " ") + " ");
+  // scanned PDFs often turn "§ 11 Verfallfristen" into "§ 11 Verfallfristen :"
+  const line = part.replace(/\s*:$/, "");
+  return line.length <= 60 && !/[.,;:!?]$/.test(line) && NUMBERED.test(line.replace(/\s+/g, " ") + " ");
 }
 
 function trimRange(text: string, start: number, end: number): Range | null {
@@ -206,8 +208,18 @@ export function analyze(text: string): Finding[] {
           const range = clip(text, sentence, hit);
           const key = `${category.id}:${range.start}`;
           const severity = (pattern as Pattern).severity ?? category.severity;
-          const existing = findings.get(key);
+          // two clips of one long sentence that overlap become one excerpt
+          const existing =
+            findings.get(key) ??
+            [...findings.values()].find(
+              (f) => f.categoryId === category.id && f.start < range.end && range.start < f.end,
+            );
           if (existing) {
+            if (range.start < existing.start || range.end > existing.end) {
+              existing.start = Math.min(existing.start, range.start);
+              existing.end = Math.max(existing.end, range.end);
+              existing.quote = collapse(text.slice(existing.start, existing.end));
+            }
             if (SEVERITY_RANK[severity] < SEVERITY_RANK[existing.severity]) existing.severity = severity;
             const overlaps = existing.matches.some((r) => hit.start < r.end && r.start < hit.end);
             if (!overlaps) existing.matches.push(hit);
