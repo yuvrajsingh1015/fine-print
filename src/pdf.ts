@@ -2,7 +2,7 @@
 // browsers (it calls Map.prototype.getOrInsertComputed when rendering).
 import { getDocument, GlobalWorkerOptions, type PDFDocumentProxy } from "pdfjs-dist/legacy/build/pdf.mjs";
 import workerUrl from "pdfjs-dist/legacy/build/pdf.worker.min.mjs?url";
-import { cleanPdfText } from "./pdftext";
+import { cleanPdfText, joinBrokenParagraphs } from "./pdftext";
 
 GlobalWorkerOptions.workerSrc = workerUrl;
 
@@ -113,7 +113,7 @@ export async function extractPdfText(
 
     const pages = Math.min(pdf.numPages, MAX_OCR_PAGES);
     try {
-      text = cleanPdfText(await recognise(pdf, pages, onOcrProgress));
+      text = cleanPdfText(joinBrokenParagraphs(await recognise(pdf, pages, onOcrProgress)));
     } catch {
       throw new PdfError("ocr_failed");
     }
