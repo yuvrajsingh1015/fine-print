@@ -1,0 +1,35 @@
+#
+Allgemeine Geschäftsbedingungen Mobilfunk – Funkfix GmbH
+
+#cats: minimum_term
+1. Die Mindestvertragslaufzeit beträgt 24 Monate.
+
+#cats: auto_renewal,notice_period,minimum_term
+2. Nach Ablauf der Mindestvertragslaufzeit verlängert sich der Vertrag auf unbestimmte Zeit und kann vom Kunden jederzeit mit einer Frist von einem Monat gekündigt werden.
+
+#cats: price_change
+3. Funkfix ist berechtigt, die Entgelte bei einer Änderung der Umsatzsteuer entsprechend anzupassen. Sonstige Preiserhöhungen werden dem Kunden mindestens einen Monat vorher in Textform mitgeteilt; der Kunde hat dann ein Sonderkündigungsrecht.
+
+#cats: fees
+4. Für die Anschlussaktivierung wird ein einmaliger Bereitstellungspreis von 39,99 € berechnet.
+
+#cats: fees
+5. Für jede vom Kunden zu vertretende Rücklastschrift stellen wir 7,45 € in Rechnung, sofern der Kunde nicht nachweist, dass ein geringerer Schaden entstanden ist.
+
+#cats: account_termination
+6. Funkfix ist berechtigt, den Anschluss zu sperren, wenn der Kunde mit Zahlungen in Höhe von mindestens 100 € in Verzug ist.
+
+#cats: data_sharing
+7. Zur Prüfung der Kreditwürdigkeit übermittelt Funkfix Daten über die Beantragung und Beendigung des Vertrags an die SCHUFA.
+
+#cats: tracking
+8. Verkehrsdaten werden zu Abrechnungszwecken gespeichert und mit Einwilligung des Kunden für Marketingzwecke ausgewertet.
+
+#cats: liability
+9. Für leicht fahrlässig verursachte Vermögensschäden ist die Haftung auf 12.500 € je Kunde begrenzt.
+
+#cats: arbitration
+10. Funkfix ist nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+
+#
+11. Der Kunde erhält eine SIM-Karte, die Eigentum von Funkfix bleibt.

@@ -1,0 +1,47 @@
+#
+IRONWORKS FITNESS – MEMBERSHIP AGREEMENT
+
+#
+1. Membership Plans. Member selects the plan indicated above. All plans include access to the main floor during staffed hours.
+
+#cats: minimum_term
+2. Term. The Basic Plan has an initial commitment of twelve (12) consecutive months beginning on the Start Date.
+
+#cats: auto_renewal
+3. Renewal. Upon expiration of the initial commitment, this Agreement shall continue on a month-to-month basis until terminated as set out below.
+
+#cats: notice_period
+4. Cancellation by Member. Member may cancel after the initial commitment by delivering written notice in person or by certified mail no less than thirty (30) days prior to the next draft date.
+
+#cats: fees
+5. Early Cancellation. If Member cancels before the end of the initial commitment, Member agrees to pay a buyout amount equal to fifty percent (50%) of the remaining monthly dues.
+
+#cats: fees
+6. Annual Fee. An annual maintenance fee of $49.99 will be charged to Member's account on or about the 1st of March each year.
+
+#cats: price_change
+7. Rate Adjustments. Ironworks may adjust monthly dues upon thirty days' notice posted at the front desk or sent by email.
+
+#cats: fees,account_termination
+8. Returned Payments. Any draft returned unpaid will incur a $25 service charge, and Member's access will be blocked until the balance is paid.
+
+#cats: account_termination
+9. Club Rules. Management may revoke membership privileges without refund for violation of club rules or conduct deemed inappropriate.
+
+#cats: liability
+10. Release. Member voluntarily assumes all risks of injury and releases Ironworks, its owners and staff from any and all claims arising from use of the facilities, including claims based on the negligence of Ironworks.
+
+#cats: liability
+11. Personal Property. Ironworks is not responsible for lost, stolen or damaged items left in lockers or anywhere on the premises.
+
+#cats: data_sharing
+12. Information. Member consents to Ironworks providing member contact details to affiliated clubs and selected marketing partners.
+
+#cats: tracking
+13. Video Surveillance. For security purposes, the facility is monitored by video cameras and recordings may be retained for up to 30 days.
+
+#cats: arbitration
+14. Disputes. Any controversy arising out of this Agreement shall be settled by binding arbitration administered by the American Arbitration Association, and Member waives any right to a jury trial.
+
+#
+15. Guests. Members may bring one guest per visit when accompanied by the member.

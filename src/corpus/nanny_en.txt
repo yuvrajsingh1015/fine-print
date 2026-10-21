@@ -1,0 +1,26 @@
+#
+Part-Time Employment Contract – Retail Assistant
+
+#cats: working_time
+Your hours will vary from week to week according to the rota, which may be changed at short notice. You may be asked to work evenings, weekends and bank holidays.
+
+#cats: price_change
+The company may introduce, vary or withdraw any staff discount or benefit at its discretion.
+
+#cats: fees
+Any till shortages caused by your negligence may be recovered from your wages.
+
+#cats: notice_period
+After the first month, you are entitled to receive and required to give one week's notice for each completed year of service.
+
+#cats: side_jobs
+You must inform your manager before taking up any additional job, so that we can make sure your total hours stay within legal limits.
+
+#cats: account_termination
+We may suspend you on full pay while we investigate any allegation of misconduct.
+
+#cats: claim_deadline
+Any grievance about pay must be raised in writing within 28 days of the payment date.
+
+#
+Uniform will be provided free of charge.

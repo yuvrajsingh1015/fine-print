@@ -1,0 +1,32 @@
+#
+Nutzungsbedingungen – Flimmer Plus
+
+#cats: auto_renewal
+Ihre Mitgliedschaft wird monatlich abgerechnet und läuft weiter, bis Sie sie kündigen.
+
+#cats: auto_renewal
+Nach Ende des Probemonats wird die Mitgliedschaft automatisch kostenpflichtig, sofern Sie nicht vorher kündigen.
+
+#cats: notice_period
+Sie können Ihre Mitgliedschaft jederzeit zum Ende des laufenden Abrechnungszeitraums kündigen.
+
+#cats: price_change
+Wir können unsere Abo-Preise von Zeit zu Zeit ändern. Über Preisänderungen informieren wir Sie mindestens 30 Tage im Voraus.
+
+#cats: price_change
+Wir behalten uns vor, diese Nutzungsbedingungen jederzeit zu ändern. Widersprechen Sie nicht innerhalb von sechs Wochen, gelten die Änderungen als genehmigt.
+
+#cats: tracking
+Wir werten Ihr Sehverhalten aus, um Ihnen personalisierte Empfehlungen und Werbung anzuzeigen.
+
+#cats: data_sharing
+Ihre Daten können an verbundene Unternehmen in den USA übermittelt werden.
+
+#cats: account_termination
+Wir können Ihr Konto ohne Vorankündigung sperren, wenn wir einen Missbrauch vermuten.
+
+#cats: liability
+Wir übernehmen keine Gewähr dafür, dass der Dienst jederzeit verfügbar ist.
+
+#
+Die Inhalte stehen in Deutsch und Englisch zur Verfügung.

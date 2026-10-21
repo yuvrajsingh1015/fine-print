@@ -1,0 +1,32 @@
+#
+Arbeitsvertrag für geringfügig Beschäftigte
+
+#cats: notice_period
+§ 2 Probezeit. Die ersten sechs Monate gelten als Probezeit. Während der Probezeit kann das Arbeitsverhältnis mit einer Frist von zwei Wochen gekündigt werden.
+
+#cats: working_time
+§ 3 Tätigkeit. Der Arbeitnehmer wird als Verkaufshilfe eingestellt. Er ist verpflichtet, auch andere zumutbare Arbeiten zu übernehmen, die seinen Fähigkeiten entsprechen, auch in einer anderen Filiale.
+
+#cats: working_time
+§ 4 Vergütung. Mit dem Gehalt sind bis zu zwei Überstunden pro Woche abgegolten. Darüber hinausgehende Überstunden werden nur vergütet, wenn sie vorher angeordnet wurden.
+
+#cats: price_change
+§ 4 Abs. 3. Sonderzahlungen sind freiwillig; auch bei wiederholter Zahlung entsteht kein Rechtsanspruch für die Zukunft.
+
+#cats: claim_deadline
+§ 6 Urlaub. Der vertragliche Mehrurlaub verfällt am 31. März des Folgejahres, auch wenn er wegen Krankheit nicht genommen werden konnte.
+
+#cats: side_jobs
+§ 9 Nebenbeschäftigung. Der Arbeitnehmer versichert, keine weitere geringfügige Beschäftigung auszuüben. Die Aufnahme jeder weiteren Beschäftigung ist dem Arbeitgeber vorher mitzuteilen.
+
+#cats: fees
+§ 11 Vertragsstrafe. Tritt der Arbeitnehmer die Arbeit nicht an oder löst er das Arbeitsverhältnis vertragswidrig, zahlt er eine Vertragsstrafe in Höhe eines halben Bruttomonatsgehalts.
+
+#cats: notice_period,account_termination
+§ 12 Kündigung. Nach der Probezeit gilt eine Kündigungsfrist von vier Wochen zum Fünfzehnten oder zum Ende eines Kalendermonats. Der Arbeitgeber ist berechtigt, den Arbeitnehmer nach Ausspruch einer Kündigung von der Arbeitsleistung freizustellen.
+
+#cats: claim_deadline
+§ 13 Verfall von Ansprüchen. Alle Ansprüche aus dem Arbeitsverhältnis sind innerhalb von drei Monaten nach Fälligkeit in Textform geltend zu machen. Lehnt die Gegenseite ab, ist der Anspruch innerhalb weiterer drei Monate einzuklagen.
+
+#
+§ 8 Krankheit. Die Arbeitsunfähigkeit ist dem Arbeitgeber unverzüglich anzuzeigen.

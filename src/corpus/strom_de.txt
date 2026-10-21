@@ -1,0 +1,26 @@
+#
+Ergänzende Bedingungen für die Belieferung mit Strom – Sonnenstrom eG
+
+#cats: minimum_term
+Ziffer 2. Der Liefervertrag hat eine Erstlaufzeit bis zum Ende des zwölften vollen Liefermonats.
+
+#cats: auto_renewal,notice_period
+Ziffer 3. Danach setzt sich der Vertrag auf unbestimmte Zeit fort und ist mit einer Frist von einem Monat kündbar.
+
+#cats: price_change
+Ziffer 5. Ändern sich Steuern, Abgaben oder Netzentgelte, gibt Sonnenstrom diese Änderungen in der jeweiligen Höhe an den Kunden weiter.
+
+#cats: fees
+Ziffer 6. Für die Unterbrechung und Wiederherstellung der Versorgung stellt Sonnenstrom jeweils 54 € in Rechnung.
+
+#cats: account_termination
+Ziffer 7. Bei Nichterfüllung einer Zahlungsverpflichtung trotz Mahnung ist Sonnenstrom berechtigt, die Belieferung vier Wochen nach Androhung einzustellen.
+
+#cats: data_sharing
+Ziffer 9. Zur Abrechnung werden Verbrauchsdaten an den Messstellenbetreiber und den Netzbetreiber weitergeleitet.
+
+#cats: liability
+Ziffer 10. Für Schäden durch Unterbrechungen der Stromversorgung haftet Sonnenstrom nicht, soweit diese vom Netzbetreiber verursacht wurden.
+
+#
+Ziffer 1. Sonnenstrom liefert Ökostrom aus Anlagen in Deutschland.

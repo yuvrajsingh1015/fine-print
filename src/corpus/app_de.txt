@@ -1,0 +1,29 @@
+#
+Nutzungsbedingungen – Herzklopfen Dating-App
+
+#cats: auto_renewal
+Premium-Abos werden über den App-Store abgerechnet und erneuern sich automatisch um die gewählte Laufzeit.
+
+#cats: notice_period
+Die Kündigung muss spätestens 24 Stunden vor Ende der laufenden Abo-Periode in den Einstellungen des App-Stores erfolgen.
+
+#cats: fees
+Bereits gezahlte Beträge werden bei vorzeitiger Kündigung nicht erstattet.
+
+#cats: price_change
+Wir dürfen den Funktionsumfang und die Preise der Premium-Funktionen jederzeit ändern.
+
+#cats: tracking
+Zur Verbesserung der Vorschläge erstellen wir anhand Ihrer Wischbewegungen und Chatverläufe ein Interessenprofil.
+
+#cats: data_sharing
+Ihr Profil kann für Nutzer unserer Partner-Apps sichtbar sein; dazu werden Profildaten an diese Apps übertragen.
+
+#cats: account_termination
+Wir können Profile, die gegen die Community-Richtlinien verstoßen, ohne Vorwarnung entfernen.
+
+#cats: liability
+Für das Verhalten anderer Nutzer übernehmen wir keinerlei Verantwortung.
+
+#
+Die App ist für Personen ab 18 Jahren bestimmt.

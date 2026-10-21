@@ -1,0 +1,26 @@
+#
+AGB – Modehaus Kleiderfuchs Onlineshop
+
+#cats: fees
+Bei Rücksendung trägt der Kunde die unmittelbaren Kosten der Rücksendung.
+
+#cats: fees
+Für Lieferungen unter 50 € Bestellwert berechnen wir eine Versandkostenpauschale.
+
+#cats: auto_renewal
+Mit dem Fuchs-Club-Abo erhalten Sie monatlich eine Überraschungsbox; das Abo wird fortgesetzt, solange Sie es nicht beenden.
+
+#cats: data_sharing
+Bei Kauf auf Rechnung geben wir Ihre Bestelldaten zur Bonitätsprüfung an die Klarna Bank AB weiter.
+
+#cats: tracking
+Wir messen mithilfe von Pixeln, ob Sie unseren Newsletter geöffnet haben.
+
+#cats: liability
+Farbabweichungen der Ware gegenüber der Darstellung am Bildschirm stellen keinen Mangel dar.
+
+#cats: account_termination
+Kundenkonten, die missbräuchlich genutzt werden, können wir jederzeit schließen.
+
+#
+Alle Preise verstehen sich inklusive der gesetzlichen Mehrwertsteuer.
