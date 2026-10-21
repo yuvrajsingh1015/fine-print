@@ -33,6 +33,32 @@ export function dropPageMarkers(text: string): string {
 }
 
 /**
+ * Letterheads and footers ("Vorstand: …", "Telefon +49 …") repeat on every
+ * page. Short lines that show up on most pages are dropped. Digits and
+ * punctuation are ignored when comparing, so page numbers do not matter.
+ */
+export function dropRepeatedLines(pages: string[]): string[] {
+  if (pages.length < 3) return pages;
+  // single words ("und", "der") repeat everywhere, so only longer lines count
+  const key = (line: string) => {
+    const k = line.toLowerCase().replace(/[^\p{L}]/gu, "");
+    return k.length >= 6 && /\S\s+\S/.test(line.trim()) ? k : "";
+  };
+  const seen = new Map<string, number>();
+  for (const page of pages) {
+    const keys = new Set(page.split("\n").filter((l) => l.trim().length <= 100).map(key));
+    for (const k of keys) if (k) seen.set(k, (seen.get(k) ?? 0) + 1);
+  }
+  const limit = Math.max(3, Math.ceil(pages.length / 2));
+  return pages.map((page) =>
+    page
+      .split("\n")
+      .filter((line) => line.trim().length > 100 || !key(line) || (seen.get(key(line)) ?? 0) < limit)
+      .join("\n"),
+  );
+}
+
+/**
  * OCR often reads "§" as "8" or "5", so "§ 4 Vergütung" becomes "84 Vergütung".
  * Only short heading lines are touched: an "8"/"5" directly followed by a
  * section number and a capitalised word.

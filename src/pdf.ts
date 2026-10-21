@@ -2,7 +2,7 @@
 // browsers (it calls Map.prototype.getOrInsertComputed when rendering).
 import { getDocument, GlobalWorkerOptions, type PDFDocumentProxy } from "pdfjs-dist/legacy/build/pdf.mjs";
 import workerUrl from "pdfjs-dist/legacy/build/pdf.worker.min.mjs?url";
-import { cleanPdfText, dropPageMarkers, fixParagraphSigns, joinBrokenParagraphs } from "./pdftext";
+import { cleanPdfText, dropPageMarkers, dropRepeatedLines, fixParagraphSigns, joinBrokenParagraphs } from "./pdftext";
 
 GlobalWorkerOptions.workerSrc = workerUrl;
 
@@ -44,13 +44,22 @@ async function textLayer(pdf: PDFDocumentProxy): Promise<string> {
     const page = await pdf.getPage(n);
     const content = await page.getTextContent();
     let text = "";
+    let last: { x: number; y: number; h: number } | null = null;
     for (const item of content.items) {
       if (!("str" in item)) continue;
+      const [, , , , x, y] = item.transform as number[];
+      // Text layers added by scanners often have no line ends, only positions.
+      if (last && !/\s$/.test(text) && item.str && !/^\s/.test(item.str)) {
+        if (Math.abs(y - last.y) > last.h / 2) text += "\n";
+        else if (x - last.x > last.h * 0.2) text += " ";
+      }
       text += item.str + (item.hasEOL ? "\n" : "");
+      const h = item.height || Math.abs(item.transform[3] as number) || 10;
+      last = { x: x + item.width, y, h };
     }
     pages.push(text.trim());
   }
-  return pages.filter(Boolean).join("\n\n");
+  return dropRepeatedLines(pages).filter(Boolean).join("\n\n");
 }
 
 async function recognise(
@@ -74,7 +83,7 @@ async function recognise(
       out.push(data.text.trim());
       page.cleanup();
     }
-    return out.filter(Boolean).join("\n\n");
+    return dropRepeatedLines(out).filter(Boolean).join("\n\n");
   } finally {
     await worker.terminate();
   }

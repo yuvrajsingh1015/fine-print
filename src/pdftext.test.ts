@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { analyze } from "./analyze";
-import { cleanPdfText, dropPageMarkers, fixParagraphSigns, joinBrokenParagraphs } from "./pdftext";
+import { cleanPdfText, dropPageMarkers, dropRepeatedLines, fixParagraphSigns, joinBrokenParagraphs } from "./pdftext";
 
 describe("cleanPdfText", () => {
   it("joins words split at a line end", () => {
@@ -63,5 +63,23 @@ describe("fixParagraphSigns", () => {
       "84 Euro werden fällig, wenn der Vertrag vorzeitig endet und der Kunde trotzdem weiter zahlt.",
     );
     expect(fixParagraphSigns("4.1 Der Lohn")).toBe("4.1 Der Lohn");
+  });
+});
+
+describe("dropRepeatedLines", () => {
+  it("drops letterhead lines that repeat on most pages", () => {
+    const body = ["Miete", "Kaution", "Haftung", "Kündigung"];
+    const pages = body.map((b, n) => `Muster GmbH • Postfach ${n}\n${b} gilt.\nTelefon +49 681 920-0`);
+    expect(dropRepeatedLines(pages)).toEqual(body.map((b) => `${b} gilt.`));
+  });
+
+  it("keeps single words that repeat", () => {
+    const pages = ["Miete\nund\nKaution", "Haftung\nund\nZahlung", "Laufzeit\nund\nEnde"];
+    expect(dropRepeatedLines(pages)).toEqual(pages);
+  });
+
+  it("leaves short documents alone", () => {
+    const pages = ["Kopf\nA", "Kopf\nB"];
+    expect(dropRepeatedLines(pages)).toEqual(pages);
   });
 });
