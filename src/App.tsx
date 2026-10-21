@@ -65,6 +65,16 @@ export default function App() {
     }
   }, [lang]);
 
+  // Escape leaves the category filter (dialogs handle Escape themselves)
+  useEffect(() => {
+    if (!filter) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape" && !document.querySelector("dialog[open]")) setFilter(null);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [filter]);
+
   const ruleFindings = useMemo(() => (scanned ? analyze(scanned) : []), [scanned]);
   const findings = useMemo(
     () => (deep.status === "done" ? mergeFindings(ruleFindings, deep.result.findings) : ruleFindings),
