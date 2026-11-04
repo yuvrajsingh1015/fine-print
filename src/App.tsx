@@ -132,15 +132,15 @@ export default function App() {
     if (file) void readPdf(file);
   }
 
-  async function runDeepCheck() {
-    if (!scanned) return;
+  async function runDeepCheck(value = scanned) {
+    if (!value) return;
     deepAbort.current?.abort();
     const controller = new AbortController();
     deepAbort.current = controller;
     const timeout = window.setTimeout(() => controller.abort(), 45_000);
     setDeep({ status: "running" });
     try {
-      const result = await requestDeepCheck(DEEP_CHECK_URL, scanned, controller.signal);
+      const result = await requestDeepCheck(DEEP_CHECK_URL, value, controller.signal);
       if (!controller.signal.aborted) setDeep({ status: "done", result });
     } catch (error) {
       if (deepAbort.current !== controller) return; // a newer scan replaced this one
@@ -150,8 +150,12 @@ export default function App() {
     }
   }
 
+  // Works before a scan too: scans the text first, then asks for consent once.
   function onDeepClick() {
-    if (consented) void runDeepCheck();
+    const value = scanned ?? text;
+    if (!value.trim()) return;
+    if (!scanned) scan(value);
+    if (consented) void runDeepCheck(value);
     else setDialog("consent");
   }
 
@@ -258,6 +262,14 @@ export default function App() {
                   {t.scan}
                 </Button>
               )}
+              <Button
+                variant="primary"
+                onClick={onDeepClick}
+                disabled={deep.status === "running" || !(scanned ?? text).trim()}
+                title={t.deepHint}
+              >
+                {deep.status === "running" ? t.deepRunning : t.deepCheck}
+              </Button>
               <Button onClick={() => fileInput.current?.click()} disabled={pdfState === "loading"}>
                 {pdfState !== "loading" ? t.uploadPdf : ocrProgress ? t.ocrRunning(ocrProgress.page, ocrProgress.pages) : t.readingPdf}
               </Button>
@@ -316,15 +328,6 @@ export default function App() {
                 <h2 id="summary-heading" className="font-mono text-sm text-fg">
                   {t.summaryHeading}
                 </h2>
-                {scanned && (
-                  <Button
-                    onClick={onDeepClick}
-                    disabled={deep.status === "running"}
-                    className="px-3 py-1.5 text-xs"
-                  >
-                    {deep.status === "running" ? t.deepRunning : t.deepCheck}
-                  </Button>
-                )}
               </div>
               <div className="mt-3">
                 {scanned ? (
