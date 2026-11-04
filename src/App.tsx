@@ -366,16 +366,18 @@ export default function App() {
         </div>
       </main>
 
-      <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-4 py-8 font-mono text-xs text-subtle sm:px-6">
-          <span>© {YEAR} Yuvraj Singh</span>
-          <button type="button" onClick={() => setDialog("privacy")} className="hover:text-accent">
-            {t.privacyLink}
-          </button>
-          <a href="https://github.com/yuvrajsingh1015/fine-print" className="hover:text-accent">
-            GitHub
-          </a>
-          <a href="https://yuvrajsingh.de" className="ml-auto hover:text-accent">
+      <footer className="border-t border-line bg-bg">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 font-mono text-xs text-subtle sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-8">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <span>© {YEAR} Yuvraj Singh</span>
+            <button type="button" onClick={() => setDialog("privacy")} className="hover:text-accent">
+              {t.privacyLink}
+            </button>
+            <a href="https://github.com/yuvrajsingh1015/fine-print" className="hover:text-accent">
+              GitHub
+            </a>
+          </div>
+          <a href="https://yuvrajsingh.de" className="hover:text-accent">
             ← {t.footerBack}
           </a>
         </div>
