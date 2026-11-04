@@ -263,6 +263,7 @@ export default function App() {
                 </Button>
               )}
               <Button
+                variant="primary"
                 onClick={onDeepClick}
                 disabled={deep.status === "running" || !(scanned ?? text).trim()}
                 title={t.deepHint}
